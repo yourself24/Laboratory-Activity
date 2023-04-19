@@ -1,0 +1,62 @@
+@model IEnumerable<Assign.DAL.Models.Assignment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_LayoutTeacher";
+}
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="labId">Filter by Lab:</label>
+        <input type="text" class="form-control" name="labId" id="labId" placeholder="Enter lab ID">
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AsName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LidNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AsName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AsDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LidNavigation.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Asid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Asid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Asid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

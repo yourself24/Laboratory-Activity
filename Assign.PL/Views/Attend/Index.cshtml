@@ -1,0 +1,58 @@
+@model  List<Assign.DAL.Models.Attendance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_LayoutTeacher";
+}
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="labId">Filter by Lab:</label>
+        <input type="text" class="form-control" name="labId" id="labId" placeholder="Enter lab ID">
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Present)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Lab)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Stud)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Present)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lab.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stud.Hobby)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AttId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AttId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AttId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

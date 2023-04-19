@@ -1,0 +1,63 @@
+@model IEnumerable<Assign.DAL.Models.Submission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_LayoutStudents";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="labId">Filter by Student:</label>
+        <input type="text" class="form-control" name="studId" id="studId" placeholder="Enter student ID">
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asign)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stud)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Link)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asign.AsDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stud.Sid)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SubId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SubId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SubId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
